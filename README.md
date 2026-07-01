@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 **Step 2 — Start the app**
 ```
-python app.py
+python hr_system.py
 ```
 
 **Step 3 — Open browser**
@@ -31,4 +31,4 @@ http://127.0.0.1:5000
 | HR Viewer  | viewer   | viewer123  | View only           |
 
 > The database (`database.db`) is created automatically on first run.
-> Each person who clones this project starts with a fresh empty database.
+
