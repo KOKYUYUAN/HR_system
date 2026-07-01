@@ -1,13 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 from datetime import datetime
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "fallback_dev_key")
+app.secret_key = "LEON_KOKYY2002"
 DB = "database.db"
 
 
