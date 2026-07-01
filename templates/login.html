@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HR System - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            width: 320px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 9px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #34495e;
+        }
+
+        .msg-error {
+            background: #fdecea;
+            color: #c0392b;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .msg-success {
+            background: #eafaf1;
+            color: #27ae60;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>HR Register System</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="msg-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+            <label>Username</label>
+            <input type="text" name="username" required placeholder="Enter username">
+
+            <label>Password</label>
+            <input type="password" name="password" required placeholder="Enter password">
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>

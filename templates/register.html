@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR System - Register Employee</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; }
+        .navbar {
+            background: #2c3e50;
+            color: white;
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a { color: white; text-decoration: none; font-size: 14px; margin-left: 16px; }
+        .navbar a:hover { text-decoration: underline; }
+        .container {
+            max-width: 580px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 { color: #2c3e50; margin-top: 0; }
+
+        /* Auto-ID badge */
+        .id-preview {
+            background: #eaf0fb;
+            border: 1px dashed #2c3e50;
+            border-radius: 6px;
+            padding: 10px 16px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+        .id-preview strong { font-size: 18px; letter-spacing: 1px; }
+
+        label { display: block; margin-bottom: 4px; color: #555; font-size: 14px; }
+        input, select {
+            width: 100%;
+            padding: 9px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .row { display: flex; gap: 14px; }
+        .row > div { flex: 1; }
+        .btn-row { display: flex; gap: 10px; margin-top: 6px; }
+        button {
+            padding: 10px 24px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        button:hover { background: #34495e; }
+        .btn-cancel {
+            padding: 10px 24px;
+            background: #ecf0f1;
+            color: #555;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .btn-cancel:hover { background: #dde; }
+        .msg-success {
+            background: #eafaf1; color: #27ae60;
+            padding: 8px 14px; border-radius: 4px;
+            margin-bottom: 12px; font-size: 13px;
+        }
+        .note { font-size: 12px; color: #999; margin-top: -12px; margin-bottom: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <strong>HR Employee Registration</strong>
+    <div>
+        <a href="/dashboard">← Back to Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Register New Employee</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="msg-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <!-- Auto-generated ID preview -->
+    <div class="id-preview">
+        🆔 CARSEM ID will be auto-generated: <strong>{{ next_id }}</strong>
+    </div>
+
+    <form method="POST">
+        <label>Full Name *</label>
+        <input type="text" name="full_name" required placeholder="e.g. Ahmad bin Ali">
+
+        <div class="row">
+            <div>
+                <label>Department *</label>
+                <select name="department" required>
+                    <option value="">-- Select --</option>
+                    <option>Finance</option>
+                    <option>Operations</option>
+                    <option>Human Resources</option>
+                    <option>IT</option>
+                    <option>Marketing</option>
+                    <option>Production</option>
+                    <option>Administration</option>
+                </select>
+            </div>
+            <div>
+                <label>Position *</label>
+                <input type="text" name="position" required placeholder="e.g. Engineer">
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label>Phone</label>
+                <input type="text" name="phone" placeholder="e.g. 012-3456789">
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="email" name="email" placeholder="e.g. name@carsem.com">
+            </div>
+        </div>
+
+        <label>Date Joined *</label>
+        <input type="date" name="date_joined" required>
+
+        <div class="btn-row">
+            <button type="submit">Register Employee</button>
+            <a class="btn-cancel" href="/dashboard">Cancel</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

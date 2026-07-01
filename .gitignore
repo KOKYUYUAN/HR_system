@@ -1,0 +1,11 @@
+# Ignore the SQLite database file (each person gets their own fresh copy)
+database.db
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment folder if any
+venv/
+.env

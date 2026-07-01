@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR System - Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; }
+        .navbar {
+            background: #2c3e50;
+            color: white;
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar span { font-size: 13px; color: #ccc; }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 16px;
+            font-size: 14px;
+        }
+        .navbar a:hover { text-decoration: underline; }
+        .container { padding: 30px; }
+        h2 { color: #2c3e50; }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .hr_admin { background: #2c3e50; color: white; }
+        .hr_viewer { background: #7f8c8d; color: white; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            margin-top: 16px;
+        }
+        th {
+            background: #2c3e50;
+            color: white;
+            padding: 12px 14px;
+            text-align: left;
+            font-size: 13px;
+        }
+        td { padding: 11px 14px; font-size: 13px; border-bottom: 1px solid #eee; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f9f9f9; }
+        .carsem-id {
+            font-weight: bold;
+            color: #2c3e50;
+            background: #eaf0fb;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .btn:hover { background: #34495e; }
+        .msg-error {
+            background: #fdecea; color: #c0392b;
+            padding: 8px 14px; border-radius: 4px;
+            margin-bottom: 12px; font-size: 13px;
+        }
+        .msg-success {
+            background: #eafaf1; color: #27ae60;
+            padding: 8px 14px; border-radius: 4px;
+            margin-bottom: 12px; font-size: 13px;
+        }
+        .empty { text-align: center; color: #999; padding: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <strong>HR Employee Registration</strong>
+    <div>
+        <span>Logged in as: <strong>{{ username }}</strong>
+        &nbsp;
+        <span class="badge {{ role }}">{{ role }}</span></span>
+        {% if role == "hr_admin" %}
+        <a href="/users">Manage Users</a>
+        {% endif %}
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="msg-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <h2>Employee List</h2>
+
+    {% if role == "hr_admin" %}
+        <a class="btn" href="/register">+ Register New Employee</a>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>CARSEM ID</th>
+                <th>Full Name</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Date Joined</th>
+                <th>Registered By</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if employees %}
+                {% for e in employees %}
+                <tr>
+                    <td><span class="carsem-id">{{ e["carsem_id"] }}</span></td>
+                    <td>{{ e["full_name"] }}</td>
+                    <td>{{ e["department"] }}</td>
+                    <td>{{ e["position"] }}</td>
+                    <td>{{ e["phone"] or "-" }}</td>
+                    <td>{{ e["email"] or "-" }}</td>
+                    <td>{{ e["date_joined"] }}</td>
+                    <td>{{ e["registered_by"] }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="8" class="empty">No employees registered yet.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
